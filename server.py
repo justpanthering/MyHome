@@ -1,18 +1,19 @@
-from flask import Flask,jsonify,request
+from flask import Flask
+from flask_restful import Api, Resource
+
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+api = Api(app)
 
-@app.route('/returnjson', methods=['GET'])
-def ReturnJSON():
-    if(request.method == 'GET'):
+class returnjson(Resource):
+    def get(self):
         data = {
-                "Title": "Hello, World",
-                "Message": "This is a simple flask json response example",
+                "title": "Hello, World",
+                "message": "This is a simple example to demonstrate the use of flask_restful",
                 }
-        return jsonify(data)
+        return data
 
-if __name__ == "__main__":
+api.add_resource(returnjson, '/returnjson')
+
+if(__name__=='__main__'):
     app.run(host='0.0.0.0', port=8123)
