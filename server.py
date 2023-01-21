@@ -1,7 +1,10 @@
 from flask import Flask
 from flask_restful import Api, Resource
 
+from api.sensors.DHT11_Temp_Humid import dht11_temp_humid
+
 app = Flask(__name__)
+app.register_blueprint(dht11_temp_humid)
 
 api = Api(app)
 
